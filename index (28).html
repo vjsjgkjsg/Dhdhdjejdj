@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>ROYAL CASINO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #D4AF37;
+    --gold-light: #F5E070;
+    --gold-dim: #8B6914;
+    --crimson: #8B0000;
+    --crimson-bright: #CC0000;
+    --bg-deep: #050508;
+    --bg-card: #0D0D14;
+    --bg-panel: #111118;
+    --text: #EEE5CC;
+    --text-dim: #9B8F7A;
+    --emerald: #00B894;
+    --sapphire: #0055AA;
+    --purple: #6C00CC;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    background: var(--bg-deep);
+    color: var(--text);
+    font-family: 'Rajdhani', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Animated background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 40% at 50% -10%, rgba(180,130,20,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 30% at 100% 80%, rgba(139,0,0,0.10) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 0% 50%, rgba(108,0,204,0.07) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Grain overlay */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0 0 100px;
+  }
+
+  /* ─── HEADER ─── */
+  .header {
+    text-align: center;
+    padding: 32px 20px 20px;
+    position: relative;
+  }
+
+  .header-ornament {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 8px;
+  }
+
+  .ornament-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+    max-width: 80px;
+  }
+
+  .diamond {
+    width: 8px; height: 8px;
+    background: var(--gold);
+    transform: rotate(45deg);
+    box-shadow: 0 0 8px var(--gold);
+  }
+
+  .logo {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(22px, 6vw, 30px);
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--gold-dim) 0%, var(--gold) 40%, var(--gold-light) 60%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 4px;
+    text-shadow: none;
+    line-height: 1.1;
+    animation: shimmer 4s ease-in-out infinite;
+    background-size: 200% 100%;
+  }
+
+  @keyframes shimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  .subtitle {
+    font-size: 11px;
+    letter-spacing: 6px;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* ─── BALANCE CARD ─── */
+  .balance-card {
+    margin: 8px 16px 20px;
+    background: linear-gradient(135deg, #1A1208 0%, #0F0C04 50%, #1A1208 100%);
+    border: 1px solid rgba(212,175,55,0.3);
+    border-radius: 20px;
+    padding: 20px 24px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5), inset 0 1px 0 rgba(212,175,55,0.15);
+  }
+
+  .balance-card::before {
+    content: '♦';
+    position: absolute;
+    right: -10px; top: -20px;
+    font-size: 120px;
+    color: rgba(212,175,55,0.03);
+    pointer-events: none;
+  }
+
+  .balance-label {
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .balance-amount {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(28px, 8vw, 38px);
+    font-weight: 700;
+    color: var(--gold);
+    text-shadow: 0 0 20px rgba(212,175,55,0.4);
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .balance-currency {
+    font-size: 16px;
+    color: var(--gold-dim);
+  }
+
+  .balance-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .btn-deposit {
+    flex: 1;
+    background: linear-gradient(135deg, var(--gold-dim), var(--gold));
+    border: none;
+    border-radius: 12px;
+    padding: 11px;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: #0D0A00;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    box-shadow: 0 4px 16px rgba(212,175,55,0.3);
+  }
+
+  .btn-deposit:active { transform: scale(0.97); }
+
+  .btn-withdraw {
+    flex: 1;
+    background: transparent;
+    border: 1px solid rgba(212,175,55,0.4);
+    border-radius: 12px;
+    padding: 11px;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: var(--gold);
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.2s;
+  }
+
+  .btn-withdraw:active { transform: scale(0.97); }
+
+  /* ─── SECTION TITLE ─── */
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 16px;
+    margin-bottom: 14px;
+  }
+
+  .section-title span {
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(212,175,55,0.3), transparent);
+  }
+
+  /* ─── CATEGORIES ─── */
+  .categories {
+    display: flex;
+    gap: 8px;
+    padding: 0 16px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    margin-bottom: 24px;
+  }
+
+  .categories::-webkit-scrollbar { display: none; }
+
+  .cat-btn {
+    flex-shrink: 0;
+    background: var(--bg-panel);
+    border: 1px solid rgba(212,175,55,0.15);
+    border-radius: 30px;
+    padding: 8px 16px;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--text-dim);
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .cat-btn.active {
+    background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(212,175,55,0.05));
+    border-color: var(--gold);
+    color: var(--gold);
+    box-shadow: 0 0 12px rgba(212,175,55,0.15);
+  }
+
+  .cat-btn:active { transform: scale(0.95); }
+
+  /* ─── GAMES GRID ─── */
+  .games-section { padding: 0 16px; }
+
+  .games-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .game-card {
+    background: var(--bg-card);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+  }
+
+  .game-card:active { transform: scale(0.96); }
+
+  .game-card:hover {
+    border-color: rgba(212,175,55,0.3);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    transform: translateY(-2px);
+  }
+
+  .game-thumb {
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 52px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .game-thumb::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 40%, var(--bg-card) 100%);
+  }
+
+  /* Per-game gradients */
+  .thumb-tg    { background: linear-gradient(135deg, #0C2340, #1A3A60); }
+  .thumb-poker { background: linear-gradient(135deg, #1A0A0A, #3A1010); }
+  .thumb-slots { background: linear-gradient(135deg, #1A1A00, #2A2600); }
+  .thumb-roulette { background: linear-gradient(135deg, #0A1A0A, #102010); }
+  .thumb-crash { background: linear-gradient(135deg, #1A0030, #2A0050); }
+  .thumb-mines { background: linear-gradient(135deg, #001A10, #002A18); }
+  .thumb-dice  { background: linear-gradient(135deg, #1A1200, #2A1E00); }
+  .thumb-plinko{ background: linear-gradient(135deg, #000A1A, #001530); }
+
+  .game-badge {
+    position: absolute;
+    top: 8px; right: 8px;
+    z-index: 2;
+    background: var(--crimson-bright);
+    color: white;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 3px 7px;
+    border-radius: 20px;
+    text-transform: uppercase;
+  }
+
+  .game-badge.hot { background: linear-gradient(90deg, #FF6B00, #FF0050); }
+  .game-badge.new { background: linear-gradient(90deg, #00B894, #0055AA); }
+
+  .game-info { padding: 10px 12px 12px; }
+
+  .game-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 0.5px;
+    margin-bottom: 3px;
+  }
+
+  .game-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .game-players {
+    font-size: 11px;
+    color: var(--text-dim);
+  }
+
+  .game-rtp {
+    font-size: 11px;
+    color: var(--emerald);
+    font-weight: 600;
+  }
+
+  /* ─── FEATURED BANNER ─── */
+  .featured-banner {
+    margin: 0 16px 24px;
+    background: linear-gradient(135deg, #0C0020 0%, #1A0035 50%, #0A0015 100%);
+    border: 1px solid rgba(108,0,204,0.4);
+    border-radius: 20px;
+    padding: 22px 20px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+
+  .featured-banner:active { transform: scale(0.98); }
+
+  .featured-banner::before {
+    content: '🎰';
+    position: absolute;
+    right: -5px; bottom: -15px;
+    font-size: 110px;
+    opacity: 0.12;
+  }
+
+  .featured-tag {
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: #AA55FF;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .featured-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 20px;
+    color: white;
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+
+  .featured-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 14px;
+    max-width: 200px;
+  }
+
+  .featured-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #6C00CC, #AA55FF);
+    border-radius: 10px;
+    padding: 9px 20px;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: white;
+    text-transform: uppercase;
+    box-shadow: 0 4px 16px rgba(108,0,204,0.4);
+  }
+
+  /* ─── JACKPOT TICKER ─── */
+  .jackpot-bar {
+    margin: 0 16px 24px;
+    background: linear-gradient(90deg, #0A0800, #1A1200, #0A0800);
+    border: 1px solid rgba(212,175,55,0.25);
+    border-radius: 12px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .jackpot-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .jackpot-amount {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 22px;
+    color: var(--gold);
+    text-shadow: 0 0 20px rgba(212,175,55,0.6);
+    animation: jackpot-pulse 2s ease-in-out infinite;
+    white-space: nowrap;
+  }
+
+  @keyframes jackpot-pulse {
+    0%, 100% { text-shadow: 0 0 20px rgba(212,175,55,0.6); }
+    50% { text-shadow: 0 0 40px rgba(212,175,55,1), 0 0 80px rgba(212,175,55,0.4); }
+  }
+
+  .jackpot-ticker {
+    font-size: 11px;
+    color: var(--text-dim);
+    animation: jackpot-counter 0.1s steps(1) infinite;
+    white-space: nowrap;
+  }
+
+  /* ─── BOTTOM NAV ─── */
+  .bottom-nav {
+    position: fixed;
+    bottom: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px;
+    background: rgba(5,5,8,0.95);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(212,175,55,0.15);
+    display: flex;
+    padding: 8px 0 max(8px, env(safe-area-inset-bottom));
+    z-index: 100;
+  }
+
+  .nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 0;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+    background: transparent;
+    color: var(--text-dim);
+  }
+
+  .nav-item.active { color: var(--gold); }
+  .nav-item:active { transform: scale(0.92); }
+
+  .nav-icon { font-size: 22px; line-height: 1; }
+  .nav-label { font-family: 'Rajdhani', sans-serif; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; font-weight: 600; }
+
+  /* ─── PROMO STRIP ─── */
+  .promo-strip {
+    margin: 0 16px 24px;
+    display: flex;
+    gap: 10px;
+  }
+
+  .promo-card {
+    flex: 1;
+    border-radius: 14px;
+    padding: 14px 12px;
+    cursor: pointer;
+    transition: transform 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .promo-card:active { transform: scale(0.97); }
+
+  .promo-card.red {
+    background: linear-gradient(135deg, #2A0000, #1A0000);
+    border: 1px solid rgba(200,0,0,0.3);
+  }
+
+  .promo-card.green {
+    background: linear-gradient(135deg, #001A10, #000F08);
+    border: 1px solid rgba(0,180,100,0.3);
+  }
+
+  .promo-icon { font-size: 28px; margin-bottom: 6px; }
+
+  .promo-title {
+    font-weight: 700;
+    font-size: 13px;
+    color: white;
+    margin-bottom: 2px;
+  }
+
+  .promo-sub { font-size: 11px; color: rgba(255,255,255,0.45); }
+
+  /* ─── ANIMATIONS ─── */
+  .game-card, .featured-banner, .promo-card {
+    animation: fadeUp 0.5s ease backwards;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .game-card:nth-child(1) { animation-delay: 0.05s; }
+  .game-card:nth-child(2) { animation-delay: 0.10s; }
+  .game-card:nth-child(3) { animation-delay: 0.15s; }
+  .game-card:nth-child(4) { animation-delay: 0.20s; }
+  .game-card:nth-child(5) { animation-delay: 0.25s; }
+  .game-card:nth-child(6) { animation-delay: 0.30s; }
+  .game-card:nth-child(7) { animation-delay: 0.35s; }
+  .game-card:nth-child(8) { animation-delay: 0.40s; }
+
+  /* Hidden game grids */
+  .games-grid[data-cat] { display: none; }
+  .games-grid.visible { display: grid; }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-ornament">
+      <div class="ornament-line"></div>
+      <div class="diamond"></div>
+      <div class="ornament-line"></div>
+    </div>
+    <div class="logo">ROYAL CASINO</div>
+    <div class="subtitle">Premium Gaming Club</div>
+  </header>
+
+  <!-- JACKPOT -->
+  <div class="jackpot-bar">
+    <div class="jackpot-label">JACKPOT</div>
+    <div class="jackpot-amount" id="jackpotAmt">₽4,729,841</div>
+  </div>
+
+  <!-- BALANCE -->
+  <div class="balance-card">
+    <div class="balance-label">Ваш баланс</div>
+    <div class="balance-amount">
+      <span id="balanceNum">10,000</span>
+      <span class="balance-currency">₽</span>
+    </div>
+    <div class="balance-actions">
+      <button class="btn-deposit">💳 Пополнить</button>
+      <button class="btn-withdraw">💰 Вывести</button>
+    </div>
+  </div>
+
+  <!-- FEATURED -->
+  <div class="featured-banner">
+    <div class="featured-tag">⚡ Бонус новичкам</div>
+    <div class="featured-title">+200% к<br>первому депозиту</div>
+    <div class="featured-desc">До 50 000 ₽ + 100 фриспинов</div>
+    <div class="featured-btn">Получить бонус</div>
+  </div>
+
+  <!-- PROMO STRIP -->
+  <div class="promo-strip">
+    <div class="promo-card red">
+      <div class="promo-icon">🔥</div>
+      <div class="promo-title">Кэшбэк 15%</div>
+      <div class="promo-sub">Каждую пятницу</div>
+    </div>
+    <div class="promo-card green">
+      <div class="promo-icon">🏆</div>
+      <div class="promo-title">Турнир</div>
+      <div class="promo-sub">Приз: 200 000 ₽</div>
+    </div>
+  </div>
+
+  <!-- CATEGORIES -->
+  <div class="section-title"><span>Категории</span></div>
+  <div class="categories">
+    <button class="cat-btn active" data-cat="all">🎲 Все игры</button>
+    <button class="cat-btn" data-cat="tg">✈️ ТГ Игры</button>
+    <button class="cat-btn" data-cat="poker">🃏 Покер</button>
+    <button class="cat-btn" data-cat="slots">🎰 Слоты</button>
+    <button class="cat-btn" data-cat="roulette">🎡 Рулетка</button>
+    <button class="cat-btn" data-cat="crash">📈 Краш</button>
+  </div>
+
+  <!-- GAMES -->
+  <div class="games-section">
+    <div class="section-title"><span>Популярные</span></div>
+
+    <div class="games-grid visible" id="grid-all">
+
+      <div class="game-card" data-cats="tg">
+        <div class="game-thumb thumb-tg">✈️
+          <span class="game-badge hot">ХИТ</span>
+        </div>
+        <div class="game-info">
+          <div class="game-name">Авиатор</div>
+          <div class="game-meta">
+            <span class="game-players">👥 2 341</span>
+            <span class="game-rtp">RTP 97%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-card" data-cats="poker">
+        <div class="game-thumb thumb-poker">🃏
+          <span class="game-badge">LIVE</span>
+        </div>
+        <div class="game-info">
+          <div class="game-name">Texas Hold'em</div>
+          <div class="game-meta">
+            <span class="game-players">👥 892</span>
+            <span class="game-rtp">RTP 98%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-card" data-cats="slots">
+        <div class="game-thumb thumb-slots">🎰
+          <span class="game-badge hot">БОНУС</span>
+        </div>
+        <div class="game-info">
+          <div class="game-name">Gold Rush</div>
+          <div class="game-meta">
+            <span class="game-players">👥 3 112</span>
+            <span class="game-rtp">RTP 96%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-card" data-cats="roulette">
+        <div class="game-thumb thumb-roulette">🎡
+          <span class="game-badge">LIVE</span>
+        </div>
+        <div class="game-info">
+          <div class="game-name">Европейская</div>
+          <div class="game-meta">
+            <span class="game-players">👥 1 544</span>
+            <span class="game-rtp">RTP 97.3%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-card" data-cats="crash">
+        <div class="game-thumb thumb-crash">📈
+          <span class="game-badge new">NEW</span>
+        </div>
+        <div class="game-info">
+          <div class="game-name">Crash X</div>
+          <div class="game-meta">
+            <span class="game-players">👥 4 891</span>
+            <span class="game-rtp">RTP 97%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-card" data-cats="tg">
+        <div class="game-thumb thumb-mines">💣</div>
+        <div class="game-info">
+          <div class="game-name">Мины</div>
+          <div class="game-meta">
+            <span class="game-players">👥 1 203</span>
+            <span class="game-rtp">RTP 97%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-card" data-cats="tg">
+        <div class="game-thumb thumb-dice">🎲</div>
+        <div class="game-info">
+          <div class="game-name">Кости</div>
+          <div class="game-meta">
+            <span class="game-players">👥 677</span>
+            <span class="game-rtp">RTP 98.5%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-card" data-cats="tg">
+        <div class="game-thumb thumb-plinko">⚽
+          <span class="game-badge hot">ТОП</span>
+        </div>
+        <div class="game-info">
+          <div class="game-name">Плинко</div>
+          <div class="game-meta">
+            <span class="game-players">👥 2 088</span>
+            <span class="game-rtp">RTP 97%</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+  <button class="nav-item active">
+    <span class="nav-icon">🏠</span>
+    <span class="nav-label">Главная</span>
+  </button>
+  <button class="nav-item">
+    <span class="nav-icon">🎮</span>
+    <span class="nav-label">Игры</span>
+  </button>
+  <button class="nav-item">
+    <span class="nav-icon">🏆</span>
+    <span class="nav-label">Турниры</span>
+  </button>
+  <button class="nav-item">
+    <span class="nav-icon">🎁</span>
+    <span class="nav-label">Бонусы</span>
+  </button>
+  <button class="nav-item">
+    <span class="nav-icon">👤</span>
+    <span class="nav-label">Профиль</span>
+  </button>
+</nav>
+
+<script>
+  // Telegram WebApp integration
+  const tg = window.Telegram?.WebApp;
+  if (tg) {
+    tg.ready();
+    tg.expand();
+    tg.setHeaderColor('#050508');
+    tg.setBackgroundColor('#050508');
+  }
+
+  // Category filter
+  const catBtns = document.querySelectorAll('.cat-btn');
+  const gameCards = document.querySelectorAll('.game-card');
+
+  catBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      catBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.dataset.cat;
+
+      gameCards.forEach(card => {
+        const cats = card.dataset.cats || 'all';
+        if (cat === 'all' || cats.includes(cat)) {
+          card.style.display = '';
+          card.style.animation = 'none';
+          card.offsetHeight;
+          card.style.animation = 'fadeUp 0.3s ease forwards';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      if (tg?.HapticFeedback) tg.HapticFeedback.selectionChanged();
+    });
+  });
+
+  // Nav items
+  document.querySelectorAll('.nav-item').forEach(item => {
+    item.addEventListener('click', () => {
+      document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+      item.classList.add('active');
+      if (tg?.HapticFeedback) tg.HapticFeedback.selectionChanged();
+    });
+  });
+
+  // Jackpot counter animation
+  let jackpot = 4729841;
+  const jackpotEl = document.getElementById('jackpotAmt');
+  setInterval(() => {
+    jackpot += Math.floor(Math.random() * 100 + 10);
+    jackpotEl.textContent = '₽' + jackpot.toLocaleString('ru-RU');
+  }, 800);
+
+  // Game cards click
+  document.querySelectorAll('.game-card').forEach(card => {
+    card.addEventListener('click', () => {
+      if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
+    });
+  });
+</script>
+</body>
+</html>
